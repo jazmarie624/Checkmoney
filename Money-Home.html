@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>J Empire — Money Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F1EA;--surface:#FFF;--edge:#D5CEC0;--edge2:#EAE4D8;
+--text:#181512;--dim:#6B6255;--accent:#7A4E2D;
+--green:#1A6B43;--greenbg:#E4F2E9;--red:#A31B3C;--redbg:#FBE8EC;
+--amber:#8A6212;--amberbg:#FAF0D8;--blue:#2A5578;--bluebg:#E4EDF4;
+--plum:#4A3560;--pink:#B01B62;--pinkbg:#FCE4EF}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;
+font-size:15px;line-height:1.55;padding-bottom:50px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#3B2A4E,#4A3560 55%,#6B4C86);color:#fff;
+padding:30px 18px 26px;text-align:center;margin-bottom:18px;position:relative;overflow:hidden}
+header:after{content:'';position:absolute;right:-60px;top:-60px;width:240px;height:240px;
+border-radius:50%;background:rgba(232,197,92,.13)}
+header .script{font-family:'Pinyon Script',cursive;font-size:34px;color:#E8C55C;line-height:1}
+header h1{font-family:Fraunces,serif;font-size:38px;font-weight:900;margin:4px 0 4px;letter-spacing:-.01em}
+header p{margin:0;font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.88}
+header .today{margin-top:9px;font-size:13px;font-weight:700;opacity:.95}
+
+.alert{background:var(--redbg);border:3px solid var(--red);border-radius:14px;
+padding:16px 20px;margin-bottom:18px}
+.alert h2{font-family:Fraunces,serif;font-size:19px;font-weight:900;margin:0 0 8px;color:var(--red)}
+.alert .row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.alert .b{background:#fff;border:2px solid var(--red);border-radius:10px;padding:10px 12px}
+.alert .b .k{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:var(--dim)}
+.alert .b .v{font-family:Fraunces,serif;font-size:25px;font-weight:900;color:var(--red);line-height:1.05;margin:2px 0 3px}
+.alert .b .s{font-size:11.5px;font-weight:600;color:var(--dim);line-height:1.4}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.card{display:block;text-decoration:none;color:inherit;background:var(--surface);
+border:2px solid var(--edge);border-radius:18px;overflow:hidden;
+box-shadow:0 4px 18px rgba(60,40,80,.10);transition:.15s}
+.card:active{transform:scale(.99)}
+.card .top{padding:20px 22px;color:#fff}
+.card.console .top{background:linear-gradient(135deg,#4A3560,#6B4C86)}
+.card.sheet .top{background:linear-gradient(135deg,#1A6B43,#2E8C5E)}
+.card .top .icon{font-size:30px;line-height:1}
+.card .top h3{font-family:Fraunces,serif;font-size:26px;font-weight:900;margin:6px 0 3px}
+.card .top .sub{font-size:12.5px;font-weight:700;opacity:.9}
+.card .body{padding:16px 22px 20px}
+.card .body ul{list-style:none;margin:0;padding:0}
+.card .body li{padding:7px 0;border-bottom:1px solid var(--edge2);font-size:13.5px;font-weight:600}
+.card .body li:last-child{border-bottom:none}
+.card .body li b{font-weight:800}
+.card .go{margin-top:14px;background:var(--accent);color:#fff;border-radius:99px;
+padding:12px;text-align:center;font-weight:800;font-size:14.5px}
+.card.sheet .go{background:var(--green)}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{background:var(--surface);border:2px solid var(--edge);border-radius:14px;padding:16px 19px}
+.box h3{font-family:Fraunces,serif;font-size:18px;font-weight:900;margin:0 0 4px}
+.box .cap{font-size:12px;color:var(--dim);font-weight:600;margin:0 0 11px}
+.ln{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+padding:8px 0;border-bottom:1px solid var(--edge2);font-size:13.5px}
+.ln:last-child{border-bottom:none}
+.ln b{font-family:Fraunces,serif;font-weight:900;font-size:17px;white-space:nowrap}
+.ln .why{display:block;font-size:11.5px;color:var(--dim);font-weight:600}
+.pos{color:var(--green)}.neg{color:var(--red)}
+.step{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--edge2)}
+.step:last-child{border-bottom:none}
+.step .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--red);color:#fff;
+display:grid;place-items:center;font-family:Fraunces,serif;font-weight:900;font-size:13px}
+.step .t{flex:1;font-size:13.5px}
+.step .t b{display:block}
+.step .t span{font-size:11.5px;color:var(--dim);font-weight:600}
+.note{background:var(--amberbg);border-left:5px solid var(--amber);border-radius:0 12px 12px 0;
+padding:13px 17px;margin-top:16px;font-size:13px;font-weight:600;line-height:1.55}
+.note b{font-weight:800}
+footer{text-align:center;margin-top:26px;font-size:12px;color:var(--dim);font-weight:600}
+@media(max-width:900px){.cards,.g2{grid-template-columns:1fr}.alert .row{grid-template-columns:1fr 1fr}}
+@media print{.card .go{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="script">J Empire</div>
+  <h1>Money Home</h1>
+  <p>Jazmin Aguayo · August through December 2026</p>
+  <div class="today" id="today"></div>
+</header>
+
+<div class="wrap">
+
+<div class="alert">
+  <h2>⚠ Right now — you have been served</h2>
+  <div class="row">
+    <div class="b"><div class="k">Respond to the court by</div><div class="v">~SEPT 5</div>
+      <div class="s">About 5 business days from service. Miss it and you lose by default even holding every dollar.</div></div>
+    <div class="b"><div class="k">Call Monday — free</div><div class="v" style="font-size:20px">Legal Aid</div>
+      <div class="s">Community Legal Services of Mid-Florida, Osceola County.</div></div>
+    <div class="b"><div class="k">Both months need</div><div class="v">$4,300</div>
+      <div class="s">August $2,200 + September $2,100. Flex won't work while August is past due.</div></div>
+    <div class="b"><div class="k">Still to find</div><div class="v">$760</div>
+      <div class="s">About $95 a day for eight days.</div></div>
+  </div>
+</div>
+
+<div class="cards">
+  <a class="card console" href="Money-Console-FINAL.html">
+    <div class="top"><div class="icon">📋</div>
+      <h3>Money Console</h3>
+      <div class="sub">The working document — day by day</div></div>
+    <div class="body">
+      <ul>
+        <li><b>The Next 8 Days</b> — August rent and the court deadline</li>
+        <li><b>September → December</b> — every deposit, what it pays</li>
+        <li><b>Step-by-step mode</b> — confirm income, confirm bills, work the list</li>
+        <li><b>Flashing marker</b> shows which deposit you're on right now</li>
+        <li><b>What If panel</b> — pawn, layaway, zero side hustle</li>
+        <li><b>Save my progress</b> — checkboxes and numbers survive closing it</li>
+      </ul>
+      <div class="go">Open the Console →</div>
+    </div>
+  </a>
+
+  <a class="card sheet" href="Money-Plan.xlsx">
+    <div class="top"><div class="icon">📊</div>
+      <h3>Money Plan — Spreadsheet</h3>
+      <div class="sub">Check the math yourself</div></div>
+    <div class="body">
+      <ul>
+        <li><b>Assumptions tab</b> — change one number, everything updates</li>
+        <li><b>Summary tab</b> — all four months side by side</li>
+        <li><b>155 live formulas</b>, verified with zero errors</li>
+        <li><b>Blue on yellow</b> = you type here. Green = pulled from elsewhere</li>
+        <li><b>Print ready</b> — landscape, one page wide, already set up</li>
+        <li>Opens in <b>Numbers</b> or Excel on your iPad</li>
+      </ul>
+      <div class="go">Open the Spreadsheet →</div>
+    </div>
+  </a>
+</div>
+
+<div class="g2">
+  <div class="box">
+    <h3>Where the money lands</h3>
+    <p class="cap">Closing balance each month, with the necklace pawned and $200 each from plasma, DoorDash and process serving.</p>
+    <div class="ln"><span>September<span class="why">after August's pawn and cash advance are cleared</span></span><b class="pos">$440</b></div>
+    <div class="ln"><span>October<span class="why">three paychecks, but the necklace redemption and $600 card payoff both land</span></span><b class="pos">$450</b></div>
+    <div class="ln"><span>November<span class="why">only two paychecks — the lean month</span></span><b class="pos">$960</b></div>
+    <div class="ln"><span>December<span class="why">after $300 set aside for the holidays</span></span><b class="pos">$1,390</b></div>
+    <div class="ln"><span><b>A full month of rent banked</b><span class="why">$2,100 sitting untouched — the finish line</span></span><b>not yet by Dec</b></div>
+  </div>
+
+  <div class="box">
+    <h3>Before you spend a dollar</h3>
+    <p class="cap">In this order. The first two matter more than the money.</p>
+    <div class="step"><span class="n">1</span><span class="t"><b>Call legal aid Monday morning</b>
+      <span>Ask two things: how many days do I actually have, and is there a defect in the notice? A Florida 3-day notice can only list unpaid rent — no late fees, no utilities.</span></span></div>
+    <div class="step"><span class="n">2</span><span class="t"><b>Check the court docket for your address</b>
+      <span>Confirm what has actually been filed.</span></span></div>
+    <div class="step"><span class="n">3</span><span class="t"><b>File your written response by ~Sept 5</b>
+      <span>This is the one deadline that effort cannot fix.</span></span></div>
+    <div class="step"><span class="n">4</span><span class="t"><b>Confirm the $500 lands Monday</b>
+      <span>Everything below it in the plan depends on that deposit.</span></span></div>
+    <div class="step"><span class="n">5</span><span class="t"><b>Ask the pawn shop about an interest-only extension</b>
+      <span>Before you sign, not after. It's your safety valve if October runs tight.</span></span></div>
+  </div>
+</div>
+
+<div class="note">
+  <b>Keep all three files in the same folder</b> so these buttons work — Money Home, Money-Console-FINAL and Money-Plan.
+  Open them from the <b>Files app</b> rather than a preview window; that's where the Console's "Save my progress" button
+  works automatically. If it can't save, it gives you a code to paste into Notes instead, and nothing is lost either way.
+</div>
+
+<div class="note" style="border-left-color:var(--pink);background:var(--pinkbg)">
+  <b>One honest note.</b> This plan works, but it is thin. September clears October's Flex payment by $40, and October only
+  adds $10 once the necklace redemption and the card payoff both hit. If anything slips, the first thing to move is the
+  second firearm — it has no deadline and no penalty for waiting. The layaway, the rent and Westlake do.
+</div>
+
+<footer>J Empire · Money Home · built with Claude</footer>
+</div>
+<script>
+document.getElementById('today').textContent =
+  'Today is ' + new Date().toLocaleDateString('en-US',
+    {weekday:'long', month:'long', day:'numeric', year:'numeric'});
+</script>
+</body>
+</html>
